@@ -106,24 +106,7 @@ exports.index = function(req,res){
         })
 
       })
-    // })
-
-   /*Goods
-    .find({})
-    .populate({
-      path: 'owner',
-      select: 'dormitory qq'
-    })
-    .populate('recency', 'name')
-    .populate('category', 'name')
-    .exec(function(err, products){
-
-      return res.render('index', {
-        user: req.session.user ,
-        categories: req.session.categories,
-        products: products
-      })
-    })*/
+    
 }
 
 exports.publish = function(req,res){
