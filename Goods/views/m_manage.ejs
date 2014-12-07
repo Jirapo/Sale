@@ -1,0 +1,29 @@
+<% include ./includes/header %>
+	<% include ./includes/top_nav %>
+	<div class="member-center clearfix">
+		<% include ./includes/left_nav %>
+		<div class="right-body pull-left commodity">
+			<div class="up">
+				<ul>
+					<% products.forEach(function(product){
+						if(product.onsale){%>
+						<li data-id="<%=product._id%>"><a href="/goods/<%=product._id%>"><%= product.title%></a
+							><span>下架<i class="fa fa-arrow-circle-right"></i></span></li>
+					<%}})%>
+				</ul>
+			</div>
+			<div class="down">
+				<ul>
+					<% products.forEach(function(product){
+						if(!product.onsale){%>
+						<li data-id="<%=product._id%>"><span><i class="fa fa-arrow-circle-left"></i>上架</span>
+							<a href="/goods/<%=product._id%>"><%= product.title%></a></li>
+					<%}})%>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+   </div>
+<script src="/javascripts/member.js"></script>
+<% include ./includes/footer %>

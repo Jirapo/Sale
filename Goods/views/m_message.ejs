@@ -1,0 +1,31 @@
+<% include ./includes/header %>
+	<% include ./includes/top_nav %>
+	<div class="member-center clearfix">
+		<% include ./includes/left_nav %>
+		<div class="right-body pull-left message">
+			<ul>
+				<% messages.forEach(function(message){%>
+				<li>
+					<h3><i class="fa fa-envelope"></i>
+					【系统公告】<%= message.title%>
+					</h3>
+					<p><%= message.content%></p>
+					<time>
+						<% var createDate=new Date(message.meta.createAt)
+							var date = createDate.getFullYear() + '-'
+								+ createDate.getMonth() + '-'
+								+ createDate.getDate() + ' '
+								+ createDate.getHours() + ':'
+								+ createDate.getMinutes() + ':'
+								+ createDate.getSeconds()%>
+						<%= date%>
+					</time>
+				</li>
+				<%})%>
+			</ul>
+		</div>
+    </div>
+
+    </div>
+<script src="/javascripts/member.js"></script>
+<% include ./includes/footer %>

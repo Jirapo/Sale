@@ -1,0 +1,51 @@
+
+<% include ./includes/header %>
+	<% include ./includes/top_nav %>
+	<section class="buy-box">
+		<form method="post" action="/purchase/save" >
+			<button type="submit">发布</button>
+			<div>
+				<label>联系人:</label>
+				<% if(user.role > 0 && user.role < 10){%>
+					<input type="text" name="purchase[person]" value="<%= user.name%>"/>
+				<%}else{%>
+				<input type="text" name="purchase[person]"/>
+				<%}%>
+			</div>
+
+			<div>
+				<label>电话:</label>
+				<% if(user.role > 0 && user.role < 10){%>
+					<input type="text" name="purchase[tel]" value="<%= user.phone%>"/>
+				<%}else{%>
+				<input type="text" name="purchase[tel]"/>
+				<%}%>
+			</div>
+
+			<div>
+				<label>求购内容:</label>
+				<textarea name="purchase[content]"></textarea>
+			</div>
+		</form>
+	</section>
+
+	<ul class="buy-list">
+		<% purchases.forEach(function(purchase){%>
+		<li>
+			<h2><i class="fa fa-smile-o fa-2x"></i> <%= purchase.content%></h2>
+			<p><%= purchase.person%><span><i class="fa fa-phone fa-lg"></i> <%= purchase.tel%></span></p>
+			<!-- <time><%= purchase.meta.createAt%></time> -->
+			<time>
+				<% var createDate=new Date(purchase.meta.updateAt)
+				var date = createDate.getFullYear() + '-'
+					+ createDate.getMonth() + '-'
+					+ createDate.getDate() + ' '
+					+ createDate.getHours() + ':'
+					+ createDate.getMinutes() + ':'
+					+ createDate.getSeconds() %>
+				<%= date%>
+			</time>
+		</li>
+		<%})%>
+	</ul>
+<% include ./includes/footer %>

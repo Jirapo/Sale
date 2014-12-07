@@ -1,0 +1,69 @@
+<% include ./includes/header %>
+	<% include ./includes/top_nav %>
+	<div class="member-center clearfix">
+		<% include ./includes/left_nav %>
+		<div class="right-body pull-left user-info">
+			<article>
+				<form method="post" action="/member/userinfo/save" >
+				<input type="hidden" name="user[uid]" value="<%= user._id%>"/>
+				<table>
+					<tbody>
+					<tr>
+						<th><i class="fa fa-star"></i>用户名：</th>
+						<td><p><%= user.name%></p>
+							<input type="text" class="hidden field" name="user[name]" value="<%= user.name%>"/>
+						</td>
+					</tr>
+					<tr>
+						<th><i class="fa fa-star"></i>手机号码：</th>
+						<td><p><%= user.phone%></p>
+							<input type="text" class="hidden field" name="user[phone]" value="<%= user.phone%>"/>
+						</td>
+					</tr>
+					<tr>
+						<th>QQ：</th>
+						<td><p><%= user.qq ? user.qq : "..." %></p>
+							<input type="text" class="hidden field" name="user[qq]" value="<%= user.qq ? user.qq : "" %>"/>
+						</td>
+					</tr>
+					<tr>
+						<th>校区：</th>
+						<td><p ><%= user.districtId ? user.districtId.name : "..." %></p>
+							<select name="user[districtId]" class="field hidden">
+								<option value="" >请选择</option>
+								<% districts.forEach(function(district){%>
+								<option value="<%= district._id%>" 
+									<% if(user.districtId){ if(district._id.toString() == user.districtId._id.toString()){ %>
+									selected
+								<%}}%>
+									><%= district.name %></option>
+								<% })%>
+							</select>
+							
+						</td>
+					</tr>
+					<tr>
+						<th>宿舍：</th>
+						<td><p><%= user.dormitory ? user.dormitory : "..." %></p>
+							<input type="text" class="hidden field" name="user[dormitory]" value="<%= user.dormitory ? user.dormitory : "" %>"/>
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td></td>
+					</tr>
+					</tbody>
+				</table>
+				</form>
+				<section>
+					<button class="edit"><i class="fa fa-pencil fa-4x"></i></button>
+					<button class="hidden save" ><i class="fa fa-save fa-4x"></i></button>
+					<button class="hidden cancle" ><i class="fa fa-reply fa-4x"></i></button>
+				</section>
+			</article>
+		</div>
+    </div>
+
+    </div>
+<script src="/javascripts/member.js"></script>
+<% include ./includes/footer %>

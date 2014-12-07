@@ -1,0 +1,45 @@
+<header class="clearfix">
+	<div class="header-user">
+		<i class="fa fa-user fa-5"></i>
+		<div>
+			<p>hi,<%= user.name%></p>
+		<% if (user.role > 10 ){ %>
+			<a href="/admin">管理中心</a>
+			<a href="/logout">登出</a>
+		<% }else if(user.role > 0){%>
+			<a href="/member/userinfo/<%= user._id%>">我的小摊</a>
+			<a href="/logout">登出</a>
+		<% }else{%>
+			<a href="/login">登录</a>
+			<a href="/reg">注册</a>
+		<% }%>
+		</div>
+	</div>
+	<footer class="pull-right">
+		<p>&copy;2014</p>
+		<p>BY 10</p>
+	</footer>
+	<!-- end footer -->
+	<div class="header-group pull-right">
+		<a href="/purchase" class="header-buy">我想买...</a>
+		<% if (user.role ){ %>
+		<a href="/publish" class="header-sale">我要卖...</a>
+		<% }%>
+	</div>
+	<div class="header-group pull-right">
+		<input type="text" class="hidden" />
+	</div>
+	<ul class="header-nav">
+			<% if(typeof(cid) == "undefined"){%>
+				<li class="cur"><a href="/">HOME</a></li>
+			<% categories.forEach(function(category){ %>
+				<li><a href="/category/<%= category._id%>"><%= category.name %></a></li>
+			<%})}else{%>
+				<li><a href="/">HOME</a></li>
+			<% categories.forEach(function(category){ %>
+				<li <% if(category._id.toString() === cid.toString()){%> class="cur"<%}%> >
+					<a href="/category/<%= category._id%>"><%= category.name %></a></li>
+		<%})}%>
+	</ul>
+</header>
+<!-- end header -->

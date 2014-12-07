@@ -1,0 +1,104 @@
+<% include ./includes/header %>
+<div class="admin-body">
+	<h1><a href="/">HOME</a>&nbsp;/&nbsp;<a href="/reg">REG</a>&nbsp;/&nbsp;<a href="/logout">LOGOUT</a></h1>
+	<br>
+	<h2 class="panel-title">站内信</h2>
+	<div class="panel-body message">
+		<ul class="list-group">
+			<% messages.forEach(function(message){%>
+			<li class="list-group-item" data-id="<%= message._id %>">
+				<h3><b><%= message.title %></b><a href="/admin/del/message?id=<%= message._id%>" class="del">删除</a><a href="javascript:void(0)" class="del edit">修改</a></h3>
+				<p><%= message.content %></p>
+			</li>
+			<% })%>
+		</ul>
+		<form class="form-horizontal" method="post" action="/admin/save/message" >
+			<div class="control-group">
+				<label class="control-label" for="message">站内信标题</label>
+				<input type="text" name="message[title]" />
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="message">站内信内容</label>
+				<input type="text" name="message[content]" />
+
+			</div>
+			<button type="submit" class="btn btn-primary">submit</button>
+		</form>
+	</div>
+	
+	<h2 class="panel-title">求购信息</h2>
+	<div class="panel-body perchase">
+		<ul class="list-group">
+			<% perchases.forEach(function(perchase){%>
+			<li class="list-group-item" data-id="<%= perchase._id %>">
+				<b><%= perchase.content %></b>
+				<a href="/admin/del/perchase?id=<%= perchase._id%>" class="del">删除</a>
+			</li>
+			<% })%>
+		</ul>
+	</div>
+
+	<h2 class="panel-title">设置校区</h2>
+	<div class="panel-body district">
+		<ul class="list-group">
+			<% districts.forEach(function(district){%>
+			<li class="list-group-item" data-id="<%= district._id %>">
+				<b><%= district.name %></b>
+				<a href="javascript:void(0)" class="del edit">修改</a>
+				<a href="/admin/del/district?id=<%= district._id%>" class="del">删除</a>
+			</li>
+			<% })%>
+		</ul>
+		<form class="form-horizontal" method="post" action="/admin/save/district" >
+			<div class="control-group">
+				<label class="control-label" for="district">校区</label>
+				<input type="text"  name="district[name]" />
+			</div>
+			<button type="submit" class="btn btn-primary">submit</button>
+		</form>
+	</div>
+
+	<h2 class="panel-title">设置分类</h2>
+	<div class="panel-body category">	
+		<ul class="list-group">
+			<% categories.forEach(function(category){ %>
+			<li class="list-group-item" data-id="<%= category._id %>">
+				<b><%= category.name %></b>
+				<a href="javascript:void(0)" class="del edit">修改</a>
+				<a href="/admin/del/category?id=<%= category._id%>" class="del">删除</a>
+			</li>
+			<% })%>
+		</ul>
+		<form class="form-horizontal" method="post" action="/admin/save/category" >
+			<div class="control-group">
+				<label class="control-label" for="category">分类</label>
+				<input type="text" name="category[name]" />
+			</div>
+			<button type="submit" class="btn btn-primary">submit</button>
+		</form>
+	</div>
+
+	<h2 class="panel-title">设置新旧程度</h2>
+	<div class="panel-body recency">	
+		<ul class="list-group">
+			<% recencies.forEach(function(recency){ %>
+			<li class="list-group-item" data-id="<%= recency._id %>">
+				<b><%= recency.name %></b>
+				<a href="javascript:void(0)" class="del edit">修改</a>
+				<a href="/admin/del/recency?id=<%= recency._id%>" class="del">删除</a>
+			</li>
+			<% })%>
+		</ul>
+		<form class="form-horizontal" method="post" action="/admin/save/recency" >
+			<div class="control-group">
+				<label class="control-label" for="recency">新旧级别</label>
+				<input type="text" name="recency[name]" />
+			</div>
+			<button type="submit" class="btn btn-primary">submit</button>
+		</form>
+	</div>
+</div>
+
+</div>
+<script src="/javascripts/admin.js"></script>
+<% include ./includes/footer %>

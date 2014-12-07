@@ -1,0 +1,230 @@
+<% include ./includes/header %>
+	<% include ./includes/top_nav %>
+
+   <article class="pull-left user-form">
+    	<form method="post" action="/member/userinfo/save" >
+    		<input type="hidden" name="user[uid]" value="<%= user._id%>" />
+    		<input type="hidden" name="publish" value="1" />
+			<table>
+				<tbody>
+					<tr>
+						<td><p><%= user.name%></p>
+							<input type="text" class="hidden field" name="user[name]" value="<%= user.name%>"/>
+						</td>
+						<th>姓名<i class="fa fa-star"></i></th>
+					</tr>
+					<tr>
+					<td><p><%= user.phone%></p>
+						<input type="text" class="hidden field" name="user[phone]" value="<%= user.phone%>"/>
+					</td>
+					<th>手机<i class="fa fa-star"></i></th>
+				</tr>
+				<tr>
+					<td><p><%= user.qq ? user.qq : "..." %></p>
+						<input type="text" class="hidden field" name="user[qq]" value="<%= user.qq ? user.qq : "" %>"/>
+					</td>
+					<th>QQ</th>
+				</tr>
+				<tr>
+					<td><p><%= user.districtId ? user.districtId.name : "..." %></p>
+						<select name="user[districtId]" class="field hidden">
+							<option value="" >请选择</option>
+							<% districts.forEach(function(district){%>
+							<option value="<%= district._id%>" 
+								<% if(user.districtId){ 
+										if(district._id.toString() == user.districtId._id.toString()){ %>
+								selected
+								<%}}%>
+								><%= district.name %></option>
+							<% })%>
+						</select>
+					</td>
+					<th>校区</th>
+				</tr>
+				<tr>
+					<td><p><%= user.dormitory ? user.dormitory : "..." %></p>
+						<input type="text" class="hidden field" name="user[dormitory]" value="<%= user.dormitory ? user.dormitory : "" %>"/>
+					</td>
+					<th>宿舍</th>
+				</tr>
+				</tbody>
+			</table>
+		</form >
+		<section>
+			<button class="edit pull-right"><i class="fa fa-pencil fa-2x"></i></button>
+			<button class="hidden save pull-right" ><i class="fa fa-save fa-2x"></i></button>
+			<button class="hidden cancle pull-right" ><i class="fa fa-reply fa-2x"></i></button>
+		</section>
+	</article>
+
+	<article class="pull-left goods-form">
+		<% if(typeof(product) == 'undefined'){%>
+		<form method="post" action="/publish/save" enctype="multipart/form-data">
+			<table>
+				<tbody>
+				<tr>
+					<th><i class="fa fa-star"></i>商品名字：</th>
+					<td><input type="text" name="product[title]"/></td>
+				</tr>
+				<tr>
+					<th><i class="fa fa-star"></i>价格：</th>
+					<td><input type="number" name="product[price]"/></td>
+				</tr>
+				<tr>
+					<th><i class="fa fa-star"></i>新旧程度：</th>
+					<td>
+						<select name="product[recency]" class="field">
+							<option value="" >请选择</option>
+							<% recencies.forEach(function(recency){%>
+							<option value="<%= recency._id%>"><%= recency.name %></option>
+							<% })%>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th><i class="fa fa-star"></i>从属类别：</th>
+					<td><select name="product[category]" class="field">
+							<option value="" >请选择</option>
+							<% categories.forEach(function(category){%>
+							<option value="<%= category._id%>"><%= category.name %></option>
+							<% })%>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>过期时间：</th>
+					<td><select name="product[deadline]" class="field">
+							<option value="" >请选择</option>
+							<option value="1" >1周</option>
+							<option value="2" >2周</option>
+							<option value="3" >3周</option>
+						</select></td>
+				</tr>
+				<tr>
+					<th>联系人：</th>
+					<td>
+						<input type="text" name="product[person]"  value="<%= user.name%>" class="field"/>
+					</td>
+				</tr>
+				<tr>
+					<th>联系方式：</th>
+					<td>
+						<input type="text" name="product[phone]"  value="<%= user.phone%>" class="field"/>
+					</td>
+				</tr>
+				<tr>
+					<th>附言：</th>
+					<td>
+						<input type="text" name="product[summary]" class="field"/>
+					</td>
+				</tr>
+				<tr>
+					<th>图片上传：</th>
+					<td class="upload"><input type="file" name="img" class="field" />
+						<span class="add-img"><i class="fa fa-plus"></i></span>
+						<span class="red-img"><i class="fa fa-minus"></i></span>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</form>
+		<%}else{%>
+			<form method="post" action="/publish/save" enctype="multipart/form-data">
+			<table>
+				<tbody>
+				<tr>
+					<th><i class="fa fa-star"></i>商品名字：</th>
+					<td><input type="text" name="product[title]" value="<%= product.title%>" /></td>
+				</tr>
+				<tr>
+					<th><i class="fa fa-star"></i>价格：</th>
+					<td><input type="number" name="product[price]" value="<%= product.price%>"/></td>
+				</tr>
+				<tr>
+					<th><i class="fa fa-star"></i>新旧程度：</th>
+					<td>
+						<select name="product[recency]" class="field">
+							<option value="" >请选择</option>
+							<% recencies.forEach(function(recency){%>
+							<option value="<%= recency._id%>" 
+								<% if(recency._id.toString() == product.recency.toString()){ %>
+								selected
+								<%}%>
+								><%= recency.name %></option>
+
+							<!-- <option value="<%= recency._id%>"><%= recency.name %></option> -->
+							<% })%>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th><i class="fa fa-star"></i>从属类别：</th>
+					<td><select name="product[category]" class="field">
+							<option value="" >请选择</option>
+							<% categories.forEach(function(category){%>
+							<option value="<%= category._id%>" 
+								<% if(category._id.toString() == product.category.toString()){ %>
+								selected
+								<%}%>
+								><%= category.name %></option>
+
+							<% })%>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>过期时间：</th>
+					<td><select name="product[deadline]" class="field">
+							<option value="" >请选择</option>
+							<% for(var i=1; i<=3; i++){%>
+								<option value="<%= i%>"
+									<% if(product.deadline.toString() == i.toString()){ %>
+								selected
+								<%}%>
+								
+								 ><%=i%>周</option>	
+							<%}%>
+							<!-- <option value="1" >1周</option>
+							<option value="2" >2周</option>
+							<option value="3" >3周</option> -->
+						</select></td>
+				</tr>
+				<tr>
+					<th>联系人：</th>
+					<td>
+						<input type="text" name="product[person]"  value="<%= product.person%>" class="field"/>
+					</td>
+				</tr>
+				<tr>
+					<th>联系方式：</th>
+					<td>
+						<input type="text" name="product[phone]"  value="<%= product.phone%>" class="field"/>
+					</td>
+				</tr>
+				<tr>
+					<th>附言：</th>
+					<td>
+						<input type="text" name="product[summary]" class="field" value="<%= product.summary%>"  />
+					</td>
+				</tr>
+				<!-- <tr>
+					<th>图片上传：</th>
+					<td class="upload"><input type="file" name="img" class="field" />
+						<span class="add-img"><i class="fa fa-plus"></i></span>
+						<span class="red-img"><i class="fa fa-minus"></i></span>
+					</td>
+				</tr> -->
+				</tbody>
+			</table>
+			<input type="hidden" name="product[pid]" class="field" value="<%= product._id%>"  />
+		</form>
+		<%}%>
+
+		<section>
+			<button class="save" ><i class="fa fa-save fa-2x"></i></button>
+			<button class="cancle" ><i class="fa fa-reply fa-2x"></i></button>
+		</section>
+	</article>
+</div>
+<script src="/javascripts/home.js"></script>
+<% include ./includes/footer %>

@@ -1,0 +1,13 @@
+<div class="left-nav pull-left">
+	<ul>
+		<li><a href="/member/message">站内信</a></li>
+		<li><a href="/member/manage">商品管理</a></li>
+		<li><a href="/member/userinfo/<%= user._id%>">个人资料</a></li>
+	</ul>
+</div>
+<script>
+	$(function () {
+		var index = <%= order%>
+		$('.left-nav').find('li').eq(parseInt(index)).addClass('cur')
+	})
+</script>

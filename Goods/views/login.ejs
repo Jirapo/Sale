@@ -1,0 +1,23 @@
+<% include ./includes/header %>
+<form class="form-horizontal" method="post" action="/login" id="reg-form">
+	<fieldset>
+		<legend><h1>用户登录</h1></legend>
+		<div class="control-group">
+			<label class="control-label" for="username">用户名</label>
+			<div class="controls">
+				<input type="text"id="phone" name="user[name]" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="password">口令</label>
+			<div class="controls">
+				<input type="password" id="password" name="user[password]" />
+			</div>
+		</div>
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">登录</button>
+		</div>
+	</fieldset>
+</form>
+</div>
+<% include ./includes/footer %>

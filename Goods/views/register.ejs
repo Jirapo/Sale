@@ -1,0 +1,35 @@
+<% include ./includes/header %>
+<form class="form-horizontal" method="post" action="/reg" id="reg-form">
+	<fieldset>
+		<legend><h1>用户注册</h1></legend>
+		<div class="control-group">
+			<label class="control-label" for="username">用户名(实名)</label>
+			<div class="controls">
+				<input type="text"id="username" name="user[name]" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="username">手机</label>
+			<div class="controls">
+				<input type="text"id="phone" name="user[phone]" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="password">口令</label>
+			<div class="controls">
+				<input type="password" id="password" name="user[password]" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="passwordR">重复输入口令</label>
+			<div class="controls">
+				<input type="password" id="passwordR" name="passwordR" />
+			</div>
+		</div>
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">注册</button>
+		</div>
+	</fieldset>
+</form>
+</div>
+<% include ./includes/footer %>

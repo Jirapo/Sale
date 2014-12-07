@@ -1,0 +1,73 @@
+<% include ./includes/header %>
+	<% include ./includes/top_nav %>
+	<article class="pull-left goods-detail">
+		<table>
+			<tbody>
+			<tr>
+				<th></i>姓名：</th>
+				<td><%= product.person%></td>
+			</tr>
+			<tr>
+				<th>联系方式：</th>
+				<td><%= product.phone%></td>
+			</tr>
+			<tr>
+				<th>QQ：</th>
+				<td><%= product.owner.qq%></td>
+			</tr>
+			<tr>
+				<th>校区：</th>
+				<td><%= district.name%></td>
+			</tr>
+			<tr>
+				<th>宿舍：</th>
+				<td><%= product.owner.dormitory%></td>
+			</tr>
+			<tr>
+				<th></i>商品名字：</th>
+				<td><%= product.title%></td>
+			</tr>
+			<tr>
+				<th></i>价格：</th>
+				<td><i class="fa fa-jpy fa-lg"></i> <%= product.price%></td>
+			</tr>
+			<tr>
+				<th></i>新旧程度：</th>
+				<td><%= product.recency.name%></td>
+			</tr>
+			<tr>
+				<th>从属类别：</th>
+				<td><i class="fa fa-tag fa-lg"></i> <%= product.category.name%></td>
+			</tr>
+			<tr>
+				<th>附言：</th>
+				<td><%= product.summary%></td>
+			</tr>
+			<tr>
+				<th>更新时间：</th>
+				<td>
+					<time>
+						<% var createDate=new Date(product.meta.updateAt)
+						var date = createDate.getFullYear() + '-'
+							+ createDate.getMonth() + '-'
+							+ createDate.getDate() + ' '
+							+ createDate.getHours() + ':'
+							+ createDate.getMinutes() + ':'
+							+ createDate.getSeconds()%>
+					<%= date%>
+					</time>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<% if(product.owner._id.toString() == user._id.toString()){ %>
+			<a href="/publish?gid=<%= product._id%>"><i class="fa fa-pencil "></i>修改</a>
+		<%}%>
+	</article>
+	<article class="pull-left goods-img">
+		<% product.pic.forEach(function(src){%>
+		<img src="/upload/<%= src%>">
+		<% }) %>
+	</article>
+	</div>
+<% include ./includes/footer %>

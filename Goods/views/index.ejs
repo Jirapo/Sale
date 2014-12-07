@@ -1,0 +1,49 @@
+<% include ./includes/header %>
+	<% include ./includes/top_nav %>
+		<ul class="goods-list clearfix">
+			<% products.forEach(function(product){
+			if(product.onsale){%>
+			<li class="clearfix">
+				<section class="pull-left goods-info">
+					<a href="/goods/<%=product._id%>">
+						<h1><%= product.title%></h1>
+						<h2 ><i class="fa fa-jpy fa-lg"></i><%= product.price%></h2>
+						<h3><%= product.recency.name%></h3>
+						<h3><i class="fa fa-tag fa-lg"></i><%= product.category.name%></h3>
+						<p><%= product.summary%></p>
+						<time>
+							<% var createDate=new Date(product.meta.updateAt)
+							var date = createDate.getFullYear() + '-'
+								+ createDate.getMonth() + '-'
+								+ createDate.getDate() + ' '
+								+ createDate.getHours() + ':'
+								+ createDate.getMinutes() + ':'
+								+ createDate.getSeconds()%>
+						<%= date%>
+						</time>
+					</a>
+				</section>
+				<section class="pull-left goods-gallery">
+					<ul>
+						<% product.pic.forEach(function(src){%>
+						<li><img src="/upload/<%= src%>"></li>
+						<% }) %>
+						<!-- <li><img src="../img/a-b2.jpg"></li>
+						<li><img src="../img/a-b3.jpg"></li> -->
+					</ul>
+					
+				</section>
+				<section class="pull-left goods-user">
+					<div class="bg">
+						<h1 class="name"><%= product.person%></h1>
+						<p><i class="fa fa-map-marker fa-lg"></i> <%= product.owner.dormitory%></p>
+						<p><i class="fa fa-phone fa-lg"></i> <%= product.phone%></p>
+						<p><i class="fa fa-qq fa-1x"></i> <%= product.owner.qq%> </p>
+					</div>
+				</section>
+			</li>
+			<%}})%>
+		</ul>
+
+    </div>
+<% include ./includes/footer %>
